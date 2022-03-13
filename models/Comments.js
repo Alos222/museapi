@@ -6,15 +6,23 @@ const CommentSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        artId: {
+            type: String,
+            required: true
+        },
         title: {
             type: String,
             required: true,
-            minlength: 8,
         },
         body: {
             type: String,
             required: true,
             maxlength: 1000,
+        },
+        userId: {
+            type: mongoose.Types.ObjectId,
+            ref: 'User',
+            required: true,
         }
     },
     { timestamps: true }
