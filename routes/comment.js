@@ -13,6 +13,17 @@ router.get('/', async(req, res, next) => {
     }
 })
 
+router.get('/:artId', async(req, res, next) => {
+    try {
+        console.log(req.params.artId)
+        const comments = await Comment.find({artId: req.params.artId})
+        console.log(comments)
+        return res.status(200).json(comments)
+    } catch(err) {
+        return res.status(500).json(err)
+    }
+})
+
 router.post('/create', async (req, res, next) => {
     try{
         const { username, artId, title, body, userId } = req.body;
