@@ -19,6 +19,7 @@ mongoose.connect(process.env.MONGODB_URL,
   .catch(err => console.log(`========== Connection issue with MongoDB ========== ${err}`));
   
 app.use('/api/auth', routes.auth);
+app.use('/api/comment', routes.comment);
 
   
 app.listen(PORT, () => {
