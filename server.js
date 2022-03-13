@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 // BEFORE DEPLOYMENT --> [[[  process.env.PORT ||  ]]] 
-PORT = 6000;
+PORT = 3001;
 
 mongoose.connect(process.env.MONGODB_URL, 
   {
