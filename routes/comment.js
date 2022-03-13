@@ -36,18 +36,11 @@ router.post('/create', async (req, res, next) => {
 
 router.put('/:id', async(req, res, next) => {
     try {
-        const { username, artId, title, body, userId } = req.body;
-        const comment = await Comment.findByIdAndUpdate(req.params.id, 
-        {
-            $set: req.body
-        }, 
-        {
-            new: true,
-        }
-    )
+    const { username, artId, title, body, userId } = req.body;
+    const comment = await Comment.findByIdAndUpdate(req.params.id, req.body)
 
-    const editedComment = comment.save();
-    return res.status(200).json(editedComment);
+    // const editedComment = comment.save();
+    return res.status(200).json(comment);
     } catch (err) {
         return res.status(500).json(err)
     }
