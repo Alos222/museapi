@@ -13,6 +13,18 @@ router.get('/', async(req, res, next) => {
     }
 })
 
+router.get('/find/:commentID', async(req, res, next) => {
+    try{
+        console.log(req.params.commentID)
+        const comment = await Comment.findById(req.params.commentID)
+        console.log(comment)
+
+        return res.status(200).json(comment)
+    } catch(err) {
+        return res.status(500).json(err)
+    }
+})
+
 router.get('/:artId', async(req, res, next) => {
     try {
         console.log(req.params.artId)
@@ -34,9 +46,9 @@ router.post('/create', async (req, res, next) => {
     }
 });
 
-router.put('/:id', async(req, res, next) => {
+router.put('/update/:id', async(req, res, next) => {
     try {
-    const { username, artId, title, body, userId } = req.body;
+    const { title, body } = req.body;
     const comment = await Comment.findByIdAndUpdate(req.params.id, req.body)
 
     // const editedComment = comment.save();
@@ -46,9 +58,11 @@ router.put('/:id', async(req, res, next) => {
     }
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/delete/:commentID', async (req, res, next) => {
     try{
-        const comment = await Comment.findByIdAndDelete(req.params.id);
+
+        const comment = await Comment.findByIdAndDelete(req.params.commentID);
+        console.log("this is happening! " + comment)
         if (!comment) return res.status(404).json(err)
         return res.status(200).json(comment)
     } catch (err) {
